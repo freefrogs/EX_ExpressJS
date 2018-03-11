@@ -1,13 +1,29 @@
 var express = require('express');
-var app = express();
+var bodyParser = require('body-parser');
+var fs = require('fs');
 
-app.get('/', function(req, res) {
-	res.send('hello world!');
+var app = express();
+var stringifyFile;
+
+app.use(bodyParser.json());
+
+fs.readFile('./test.json', 'utf8', function(err, data) {
+		if (err) throw err;
+		stringifyFile = data;
 });
 
-/*app.get('/:id', function(req, res) {
-	res.send('ID you have chosen is: ' + req.params.id);
-});*/
+app.get('/getNote', function(req, res) {
+		res.send(stringifyFile);
+});
+
+app.post('/updateNote/:note', function(req, res) {
+	stringifyFile += '\n' + req.params.note;
+	fs.writeFile('./test.json', stringifyFile, function(err) {
+		if (err) throw err;
+		console.log('file updated');
+		res.send(stringifyFile);
+	});
+});
 
 app.listen(3000);
 
