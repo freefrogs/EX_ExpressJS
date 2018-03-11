@@ -1,15 +1,26 @@
 var express = require('express');
 var app = express();
 
+app.use(express.static('assets'));
+
 app.get('/', function(req, res) {
-	res.send('hello world!');
+	res.sendFile('/index.html');
 });
 
-/*app.get('/:id', function(req, res) {
-	res.send('ID you have chosen is: ' + req.params.id);
-});*/
+app.get('/userform', function(req, res) {
+	const response = {
+		first_name: req.query.first_name,
+		last_name: req.query.last_name
+	};
+	res.end(JSON.stringify(response));
+});
 
-app.listen(3000);
+var server = app.listen(3000, 'localhost', function() {
+	var host = server.address().address;
+	var port = server.address().port;
+
+	console.log('Listen to http://' + host + ':' + port);
+});
 
 app.use(function (req, res, next) {
 	res.status(404).send('ERROR 404');
