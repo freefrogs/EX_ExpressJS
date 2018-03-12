@@ -1,13 +1,20 @@
 var express = require('express');
 var app = express();
 
+app.use('/store', function(req, res, next) {
+	console.log('I am between request and /store');
+	next();
+});
+
 app.get('/', function(req, res) {
+	console.log('GET for /');
 	res.send('hello world!');
 });
 
-/*app.get('/:id', function(req, res) {
-	res.send('ID you have chosen is: ' + req.params.id);
-});*/
+app.get('/store', function(req, res) {
+	console.log('GET for /store');
+	res.send('This is store');
+})
 
 app.listen(3000);
 
