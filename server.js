@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
 app.get('/store', function(req, res) {
 	console.log('GET for /store');
 	res.send('This is store');
-})
+});
 
 app.listen(3000);
 
