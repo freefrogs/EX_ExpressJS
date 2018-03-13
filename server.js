@@ -4,32 +4,12 @@ var app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-app.use('/store', function(req, res, next) {
-	console.log('I am between request and /store');
-	next();
-});
-
 app.get('/', function(req, res) {
-	console.log('GET for /');
-	res.send('hello world!');
+	res.render('main');
 });
 
-app.get('/store', function(req, res) {
-	console.log('GET for /store');
-	res.send('This is store');
-});
-
-app.get('/first-template', function(req, res) {
-	res.render('first-template');
-});
-
-app.get('/dynamic-view', function(req, res) {
-	res.render('dynamic', {
-		name: 'Pug - my dynamic website',
-		url: 'http://www.google.com'/*,
-		user:
-			{name:'Jack', age:'20'}*/
-	});
+app.get('/logged', function(req, res) {
+	res.render('logged');
 });
 
 app.listen(3000);
