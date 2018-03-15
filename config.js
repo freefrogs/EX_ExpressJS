@@ -1,5 +1,0 @@
-module.exports = {
-	'GOOGLE_CLIENT_ID': '',
-	'GOOGLE_CLIENT_SECRET': '',
-	'CALLBACK_URL': 'http://localhost:3000/auth/google/callback'
-};
